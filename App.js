@@ -5,10 +5,10 @@ import logger from 'redux-logger'
 
 import navigation from './src/reducer'
 
-import Navigator from './src/Navigator'
+import Navigator, { middleware } from './src/Navigator'
 
 const reducer = combineReducers({ navigation })
-const store = createStore(reducer, applyMiddleware(logger))
+const store = createStore(reducer, applyMiddleware(logger, middleware))
 
 export default class App extends Component {
   render() {

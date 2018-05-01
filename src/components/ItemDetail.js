@@ -7,6 +7,19 @@ class Item extends Component {
       title: `Item ${navigation.state.params.item}`
   })
 
+  componentDidMount() {
+    this.subs = [
+      this.props.navigation.addListener('willFocus', () => console.log('will focus')),
+      this.props.navigation.addListener('willBlur', () => console.log('will blur')),
+      this.props.navigation.addListener('didFocus', () => console.log('did focus')),
+      this.props.navigation.addListener('didBlur', () => console.log('did blur')),
+    ];
+  }
+
+  componentWillUnmount() {
+    this.subs.forEach(s => s.remove())
+  }
+
   goToRandomItem = () => {
     const items = ['one', 'two', 'three', 'four', 'five']
     const rand = Math.floor(Math.random() * 5)
